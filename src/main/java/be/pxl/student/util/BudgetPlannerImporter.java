@@ -19,16 +19,15 @@ import java.util.Locale;
  * Util class to import csv file
  */
 public class BudgetPlannerImporter {
-    String filename;
     HashMap<String, Account> IbanAndAccountMap;
-    public BudgetPlannerImporter(String filename) {
-        this.filename = filename;
+    public BudgetPlannerImporter() {
+
         IbanAndAccountMap = new HashMap<>();
 
     }
 
-   public List<Account> readFile(){
-       Path path = Paths.get(filename);
+   public List<Account> readFile(String filePath){
+       Path path = Paths.get(filePath);
        List<Account> accounts = new ArrayList<>();
        try(BufferedReader reader = Files.newBufferedReader(path)){
            String line = reader.readLine(); //Account name,Account IBAN,Counteraccount IBAN,Transaction date,Amount,Currency,Detail
@@ -51,14 +50,14 @@ public class BudgetPlannerImporter {
        return accounts;
    }
 
-    private Payment createPayment(String[] lines) {
+    public Payment createPayment(String[] lines) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd hh:mm:ss zzz yyyy", Locale.ENGLISH);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
         return new Payment(LocalDateTime.parse(lines[3], formatter), Float.parseFloat(lines[4]), lines[5], lines[6]);
     }
 
-    private Account createAccount(String[] lines) {
+    public Account createAccount(String[] lines) {
 
         return new Account(lines[1], lines[0]);
 

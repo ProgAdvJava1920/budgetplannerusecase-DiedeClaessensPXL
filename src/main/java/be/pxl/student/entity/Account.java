@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Account {
 
+    private int Id;
     private String IBAN;
     private String name;
     private List<Payment> payments;
@@ -12,6 +13,18 @@ public class Account {
     public Account(String IBAN, String name) {
         this.IBAN = IBAN;
         this.name = name;
+    }
+
+    public Account() {
+
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getIBAN() {
