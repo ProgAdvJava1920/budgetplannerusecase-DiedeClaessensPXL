@@ -1,21 +1,27 @@
 package be.pxl.student.entity;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import javax.persistence.*;
+import java.util.Objects;
+@Entity
+public class AccountJPA {
 
-public class  Account {
-
+    @Id
     private int Id;
     private String IBAN;
     private String name;
-    private List<Payment> payments;
+    @ElementCollection
+    private List<Payment> payments = new ArrayList<>();
 
-    public Account(String IBAN, String name) {
+    public AccountJPA(String IBAN, String name) {
         this.IBAN = IBAN;
         this.name = name;
     }
 
-    public Account() {
+    public AccountJPA() {
 
     }
 
