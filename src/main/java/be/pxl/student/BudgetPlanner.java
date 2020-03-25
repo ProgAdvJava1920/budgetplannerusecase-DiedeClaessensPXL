@@ -13,10 +13,9 @@ public class BudgetPlanner {
                 EntityManagerFactory entityManagerFactory = null;
                 EntityManager entityManager = null;
                 try {
-                    entityManagerFactory = Persistence.createEntityManagerFactory("paymentsdb_pu");
+                    entityManagerFactory = Persistence.createEntityManagerFactory("PaymentsJPA");
                     entityManager = entityManagerFactory.createEntityManager();
-
-                    TypedQuery<PaymentJPA> query = entityManager.createQuery("SELECT payment from PaymentJPA payment", PaymentJPA.class);
+                    PaymentJPA payment = entityManager.find(PaymentJPA.class, 1L);
                 }
                 finally {
                     if (entityManager != null) {
